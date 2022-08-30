@@ -1,7 +1,9 @@
 title="Google"
 url="https://google.com.br"
 description="search sites"
+keys="google, busca, pesquisa"
 
 title="Google 2"
 url="https://google.com.br"
 description="search sites"
+keys=""
