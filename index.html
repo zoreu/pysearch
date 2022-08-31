@@ -1,0 +1,87 @@
+<link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+<link rel="stylesheet" href="main.css" />
+<script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<py-script>
+    import re
+    import os
+    from urllib.parse import urlparse
+    from js import console
+
+    def browser(url):
+        from pyodide.http import open_url
+        data = open_url(url)
+        data = data.read()
+        return data
+
+    def motor_search(search):
+        listsearch = Element('listsearch')
+        listsearch.element.innerText = ""
+        #listsearch.element.innerText = search
+        data = browser('https://raw.githubusercontent.com/zoreu/pysearch/main/search.txt')
+        console.log('acessou dados')
+        query = re.findall('title="(.*?)".+?rl="(.*?)".+?escription="(.*?)".+?eys="(.*?)"', data, flags=re.IGNORECASE|re.MULTILINE|re.DOTALL)
+        if query:
+            for title, url, description, keys in query:
+                if re.search(search, keys, flags=re.IGNORECASE):
+                    url_parsed = urlparse(url)
+                    breakline = document.createElement('br')
+                    host = url_parsed.scheme + '://' + url_parsed.netloc
+                    a1 = document.createElement('a')
+                    a1.href = url
+                    a1.classList.add('search_url')
+                    a1.innerText = host
+
+                    a2 = document.createElement('a')
+                    a2.href = url
+                    a2.classList.add('search_title')
+                    a2.innerText = title
+
+                    div = document.createElement('div')
+                    div.innerText = description
+                    div.classList.add('search_desc')
+
+                    #url_parsed = urlparse(url)
+                    #box_init = '<div class="item_search">\n'
+                    #title_href = '<a href="'+url+'">'+title+'</a>\n'
+                    #host = url_parsed.scheme + '://' + url_parsed.netloc
+                    #box_host= '<div class="search_url">' + host +'</div>\n'
+                    #box_title = '<div class="search_title">'+ title_href +'</div>\n'
+                    #box_desc = '<div class="search_desc">'+description+'</div>\n'
+                    #box_end = '</div>\n'
+                    #box_final = box_init + box_host + box_title + box_desc
+                    #listsearch.element.innerText += box_final
+                    document.getElementById("listsearch").append(a1)
+                    document.getElementById("listsearch").append(document.createElement('br'))
+                    document.getElementById("listsearch").append(a2)
+                    document.getElementById("listsearch").append(document.createElement('br'))
+                    document.getElementById("listsearch").append(div)
+                    document.getElementById("listsearch").append(document.createElement('br'))
+                    document.getElementById("listsearch").append(document.createElement('br'))
+        else:
+            console.log('sem dados!')
+
+
+    def fsearch(*args, **kargs):
+        input_search = Element('search')
+        value_search = input_search.element.value
+        #words.append(value_search)
+        console.log(value_search)
+        input_search.element.value = ""
+        motor_search(value_search)
+
+    def enter_check(e):
+        if e.key == 'Enter':
+            fsearch()
+    input_search = Element('search')
+    input_search.element.onkeypress = enter_check
+
+</py-script>
+<main>
+    <center>
+    <div class="container">
+    <input id="search" type="text" placeholder="Digite a pesquisa"><button id="findsearch" class="form-submit-button" type="submit" pys-onCLick="fsearch">Pesquisar</button>
+    </div>
+    </center>
+    <div id="listsearch"></div>
+</main>
