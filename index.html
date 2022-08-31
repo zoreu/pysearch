@@ -21,31 +21,32 @@
         query = re.findall('title="(.*?)".+?rl="(.*?)".+?escription="(.*?)".+?eys="(.*?)"', data, flags=re.IGNORECASE|re.MULTILINE|re.DOTALL)
         if query:
             for title, url, description, keys in query:
-                if re.search(search, keys, flags=re.IGNORECASE):
-                    url_parsed = urlparse(url)
-                    breakline = document.createElement('br')
-                    host = url_parsed.scheme + '://' + url_parsed.netloc
-                    a1 = document.createElement('a')
-                    a1.href = url
-                    a1.classList.add('search_url')
-                    a1.innerText = host
+                if search !='':
+                    if re.search(search, keys, flags=re.IGNORECASE):
+                        url_parsed = urlparse(url)
+                        breakline = document.createElement('br')
+                        host = url_parsed.scheme + '://' + url_parsed.netloc
+                        a1 = document.createElement('a')
+                        a1.href = url
+                        a1.classList.add('search_url')
+                        a1.innerText = host
 
-                    a2 = document.createElement('a')
-                    a2.href = url
-                    a2.classList.add('search_title')
-                    a2.innerText = title
+                        a2 = document.createElement('a')
+                        a2.href = url
+                        a2.classList.add('search_title')
+                        a2.innerText = title
 
-                    div = document.createElement('div')
-                    div.innerText = description
-                    div.classList.add('search_desc')
+                        div = document.createElement('div')
+                        div.innerText = description
+                        div.classList.add('search_desc')
 
-                    document.getElementById("listsearch").append(a1)
-                    document.getElementById("listsearch").append(document.createElement('br'))
-                    document.getElementById("listsearch").append(a2)
-                    document.getElementById("listsearch").append(document.createElement('br'))
-                    document.getElementById("listsearch").append(div)
-                    document.getElementById("listsearch").append(document.createElement('br'))
-                    document.getElementById("listsearch").append(document.createElement('br'))
+                        document.getElementById("listsearch").append(a1)
+                        document.getElementById("listsearch").append(document.createElement('br'))
+                        document.getElementById("listsearch").append(a2)
+                        document.getElementById("listsearch").append(document.createElement('br'))
+                        document.getElementById("listsearch").append(div)
+                        document.getElementById("listsearch").append(document.createElement('br'))
+                        document.getElementById("listsearch").append(document.createElement('br'))
         else:
             console.log('sem dados!')
 
