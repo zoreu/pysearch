@@ -4,7 +4,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <py-script>
     import re
-    import os
     from urllib.parse import urlparse
     from js import console
 
@@ -17,7 +16,6 @@
     def motor_search(search):
         listsearch = Element('listsearch')
         listsearch.element.innerText = ""
-        #listsearch.element.innerText = search
         data = browser('https://raw.githubusercontent.com/zoreu/pysearch/main/search.txt')
         console.log('acessou dados')
         query = re.findall('title="(.*?)".+?rl="(.*?)".+?escription="(.*?)".+?eys="(.*?)"', data, flags=re.IGNORECASE|re.MULTILINE|re.DOTALL)
