@@ -41,16 +41,6 @@
                     div.innerText = description
                     div.classList.add('search_desc')
 
-                    #url_parsed = urlparse(url)
-                    #box_init = '<div class="item_search">\n'
-                    #title_href = '<a href="'+url+'">'+title+'</a>\n'
-                    #host = url_parsed.scheme + '://' + url_parsed.netloc
-                    #box_host= '<div class="search_url">' + host +'</div>\n'
-                    #box_title = '<div class="search_title">'+ title_href +'</div>\n'
-                    #box_desc = '<div class="search_desc">'+description+'</div>\n'
-                    #box_end = '</div>\n'
-                    #box_final = box_init + box_host + box_title + box_desc
-                    #listsearch.element.innerText += box_final
                     document.getElementById("listsearch").append(a1)
                     document.getElementById("listsearch").append(document.createElement('br'))
                     document.getElementById("listsearch").append(a2)
