@@ -1,0 +1,18 @@
+<html>
+<head>
+    <link rel="stylesheet" href="https://pyscript.net/unstable/pyscript.css" />
+    <script defer src="https://pyscript.net/unstable/pyscript.js"></script>
+</head>
+<body>
+    <py-script>
+from pyodide.http import pyfetch, open_url
+import re
+url = 'https://oneplayhd.com'
+#headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36'}
+#response = await pyfetch(url,headers=headers)
+#data = await response.string()
+data = open_url(url=url)
+print(data)
+    </py-script>
+</body>
+</html>
